@@ -13,4 +13,29 @@ Route::middleware(['auth'])->group(function () {
             Route::match(['GET', 'HEAD'], '/', 'index');
         }
     );
+
+    Route::group(
+        [
+            'as' => 'project.',
+            'prefix' => 'project',
+            'controller' => \App\Http\Controllers\Authorized\ProjectController::class,
+        ],
+        function () {
+            Route::match(['GET', 'HEAD'], '/', 'index')->name('index');
+            Route::match(['GET', 'HEAD'], '/create', 'create')->name('create');
+            Route::match(['POST'], '/', 'store')->name('store');
+
+            Route::group(
+                [
+                    'prefix' => '{project:r}',
+                ],
+                function () {
+                    Route::match(['GET', 'HEAD'], '/', 'show')->name('show');
+                    Route::match(['GET', 'HEAD'], '/edit', 'edit')->name('edit');
+                    Route::match(['PUT', 'PATCH'], '/', 'update')->name('update');
+                    Route::match(['DELETE'], '/', 'destroy')->name('destroy');
+                }
+            );
+        }
+    );
 });

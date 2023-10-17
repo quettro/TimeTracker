@@ -20,8 +20,12 @@ use Stephenjude\DefaultModelSorting\Traits\DefaultOrderBy;
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Project> $availableProjects
+ * @property-read int|null $available_projects_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Project> $projects
+ * @property-read int|null $projects_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @method static Builder|User newModelQuery()
@@ -47,7 +51,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * @var array
      */
-    protected $guarded = [];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     /**
      * @var string
@@ -58,4 +62,20 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var string
      */
     protected static string $orderByColumnDirection = 'desc';
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function projects(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Project::class, 'created_by', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function availableProjects(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->projects();
+    }
 }

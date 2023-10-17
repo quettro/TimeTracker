@@ -303,3 +303,14 @@ pre {
     text-slate-800
     bg-white;
 }
+
+/**
+ *
+ */
+.card {
+    @apply
+    border
+    border-slate-300
+    rounded-lg
+    bg-white;
+}
