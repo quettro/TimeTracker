@@ -12,4 +12,10 @@ return [
         \App\Enums\Invitation\StatusEnum::ACCEPTED => 'Принято',
         \App\Enums\Invitation\StatusEnum::REJECTED => 'Отклонено',
     ],
+
+    \App\Enums\Task\StatusEnum::class => [
+        \App\Enums\Task\StatusEnum::DRAFT => 'Черновик',
+        \App\Enums\Task\StatusEnum::IN_PROGRESS => 'В процессе',
+        \App\Enums\Task\StatusEnum::COMPLETED => 'Завершен',
+    ],
 ];

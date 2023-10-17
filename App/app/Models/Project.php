@@ -21,6 +21,8 @@ use Stephenjude\DefaultModelSorting\Traits\DefaultOrderBy;
  * @property-read int|null $invitations_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProjectUser> $projectUsers
  * @property-read int|null $project_users_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Task> $tasks
+ * @property-read int|null $tasks_count
  * @method static \Illuminate\Database\Eloquent\Builder|Project newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Project newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Project query()
@@ -66,6 +68,14 @@ class Project extends Model
     public function createdBy(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(User::class, 'id', 'created_by');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tasks(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Task::class, 'project_id', 'id');
     }
 
     /**

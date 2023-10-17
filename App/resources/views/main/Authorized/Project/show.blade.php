@@ -15,6 +15,7 @@
     <div class="mb-8">
         <div class="flex justify-between items-center">
             <div class="flex items-center gap-2">
+                <x-a-button :href="route('project.task.index', $project->id)">{{ __('Задачи') }}</x-a-button>
                 <x-a-button :href="route('project.user.index', $project->id)">{{ __('Пользователи') }}</x-a-button>
             </div>
 
@@ -46,6 +47,18 @@
             <li class="flex items-center border-b border-slate-300 p-5 last:border-0 break-all">
                 <div class="w-[40%] shrink-0">{{ __('Статус') }}:</div>
                 <div>{{ $project->status->description }}</div>
+            </li>
+            <li class="flex items-center border-b border-slate-300 p-5 last:border-0 break-all">
+                <div class="w-[40%] shrink-0">{{ __('Задач в проекте') }}:</div>
+                <div>{{ $project->tasks()->count() }}</div>
+            </li>
+            <li class="flex items-center border-b border-slate-300 p-5 last:border-0 break-all">
+                <div class="w-[40%] shrink-0">{{ __('Выполненных задач в проекте') }}:</div>
+                <div>{{ $project->tasks()->completed()->count() }}</div>
+            </li>
+            <li class="flex items-center border-b border-slate-300 p-5 last:border-0 break-all">
+                <div class="w-[40%] shrink-0">{{ __('Затрачено времени') }}:</div>
+                <div>{{ \Carbon\CarbonInterval::second($project->tasks()->sum('execution_time'))->forHumans() }}</div>
             </li>
             <li class="flex items-center border-b border-slate-300 p-5 last:border-0 break-all">
                 <div class="w-[40%] shrink-0">{{ __('Дата и время создания') }}:</div>

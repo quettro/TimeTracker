@@ -72,6 +72,32 @@ Route::middleware(['auth'])->group(function () {
                             Route::match(['POST'], '/', 'store')->name('store');
                         }
                     );
+
+                    Route::group(
+                        [
+                            'as' => 'task.',
+                            'prefix' => 'task',
+                            'controller' => \App\Http\Controllers\Authorized\ProjectTaskController::class,
+                        ],
+                        function () {
+                            Route::match(['GET', 'HEAD'], '/', 'index')->name('index');
+                            Route::match(['GET', 'HEAD'], '/create', 'create')->name('create');
+                            Route::match(['POST'], '/', 'store')->name('store');
+
+                            Route::group(
+                                [
+                                    'prefix' => '{task}',
+                                ],
+                                function () {
+                                    Route::match(['GET', 'HEAD'], '/', 'show')->name('show');
+                                    Route::match(['GET', 'HEAD'], '/edit', 'edit')->name('edit');
+                                    Route::match(['PUT', 'PATCH'], '/', 'update')->name('update');
+                                    Route::match(['DELETE'], '/', 'destroy')->name('destroy');
+                                    Route::match(['GET', 'HEAD'], '/tracker-toggle', 'trackerToggle')->name('tracker-toggle');
+                                }
+                            );
+                        }
+                    );
                 }
             );
         }

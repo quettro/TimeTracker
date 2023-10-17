@@ -1,0 +1,48 @@
+@extends('layouts.authorized')
+
+@section('title', __('Новая задача'))
+@section('description', __(''))
+
+@section('content')
+    <div class="mb-8">
+        {{ Breadcrumbs::render('project.task.create', $project) }}
+    </div>
+
+    <div class="mb-8">
+        <h1 class="h3">{{ __('Новая задача') }}</h1>
+    </div>
+
+    <div class="mb-0">
+        <div class="card p-8">
+            <div class="max-w-xl">
+                <x-form :action="route('project.task.store', $project->id)">
+                    <x-form-group>
+                        <x-label for="title">{{ __('Заголовок') }}</x-label>
+                        <x-input id="title" name="title" :value="old('title')" :invalid="$errors->has('title')"></x-input>
+                        <x-invalid-feedback :messages="$errors->get('title')"></x-invalid-feedback>
+                    </x-form-group>
+
+                    <x-form-group>
+                        <x-label for="description">{{ __('Текстовое описание') }}</x-label>
+                        <x-textarea id="description" name="description" :value="old('description')" :invalid="$errors->has('description')"></x-textarea>
+                        <x-invalid-feedback :messages="$errors->get('description')"></x-invalid-feedback>
+                    </x-form-group>
+
+                    <x-form-group>
+                        <x-label for="status">{{ __('Статус') }}</x-label>
+                        <x-select id="status" name="status" :option="\App\Enums\Task\StatusEnum::asSelectArray()" :o_selected="[old('status')]" :invalid="$errors->has('status')"></x-select>
+                        <x-invalid-feedback :messages="$errors->get('status')"></x-invalid-feedback>
+                    </x-form-group>
+
+                    <x-form-group>
+                        <x-label for="executor_id">{{ __('Исполнитель') }}</x-label>
+                        <x-select id="executor_id" name="executor_id" :option="$project->projectUsers()->with(['user'])->get()->pluck('user.email', 'user.id')" :o_selected="[old('executor_id')]" :invalid="$errors->has('executor_id')"></x-select>
+                        <x-invalid-feedback :messages="$errors->get('executor_id')"></x-invalid-feedback>
+                    </x-form-group>
+
+                    <x-button-primary>{{ __('Сохранить') }}</x-button-primary>
+                </x-form>
+            </div>
+        </div>
+    </div>
+@endsection
