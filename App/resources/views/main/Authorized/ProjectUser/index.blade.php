@@ -54,11 +54,15 @@
 
                                     @if($project->hasAccessToManagement(Auth::user()))
                                         <td class="table__td">
-                                            <x-form :action="route('project.user.destroy', [$project->id, $object->id])">
-                                                @method('DELETE')
+                                            @if($project->hasAccessToManagement($object->user))
+                                                -
+                                            @else
+                                                <x-form :action="route('project.user.destroy', [$project->id, $object->id])">
+                                                    @method('DELETE')
 
-                                                <button type="submit" class="!text-red-600">{{ __('Удалить') }}</button>
-                                            </x-form>
+                                                    <button type="submit" class="!text-red-600">{{ __('Удалить') }}</button>
+                                                </x-form>
+                                            @endif
                                         </td>
                                     @endif
                                 </tr>

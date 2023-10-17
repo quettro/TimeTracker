@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Authorized;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Authorized\Project\Request;
+use App\Http\Requests\Authorized\ProjectUser\DestroyRequest;
 use App\Models\Project;
 use App\Models\ProjectUser;
 use Illuminate\Contracts\Foundation\Application;
@@ -24,12 +24,12 @@ class ProjectUserController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param DestroyRequest $request
      * @param Project $project
      * @param ProjectUser $projectUser
      * @return RedirectResponse
      */
-    public function destroy(Request $request, Project $project, ProjectUser $projectUser): RedirectResponse
+    public function destroy(DestroyRequest $request, Project $project, ProjectUser $projectUser): RedirectResponse
     {
         $projectUser->delete();
 
