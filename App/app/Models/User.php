@@ -72,10 +72,10 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
-    public function availableProjects(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function availableProjects(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
     {
-        return $this->projects();
+        return $this->hasManyThrough(Project::class, ProjectUser::class, 'user_id', 'id', 'id', 'project_id');
     }
 }

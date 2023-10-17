@@ -12,20 +12,26 @@
         <h1 class="h3">{{ $project->name }}</h1>
     </div>
 
-    @if($project->hasAccessToManagement(Auth::user()))
-        <div class="mb-8">
+    <div class="mb-8">
+        <div class="flex justify-between items-center">
             <div class="flex items-center gap-2">
-                <x-a-button-primary :href="route('project.edit', $project->id)">{{ __('Редактировать') }}</x-a-button-primary>
-                <x-a-button-primary :href="route('project.invitation.index', $project->id)">{{ __('Приглашения в проект') }}</x-a-button-primary>
-
-                <x-form :action="route('project.destroy', $project->id)">
-                    @method('DELETE')
-
-                    <x-button-danger>{{ __('Удалить') }}</x-button-danger>
-                </x-form>
+                <x-a-button :href="route('project.user.index', $project->id)">{{ __('Пользователи') }}</x-a-button>
             </div>
+
+            @if($project->hasAccessToManagement(Auth::user()))
+                <div class="flex items-center gap-2">
+                    <x-a-button-primary :href="route('project.edit', $project->id)">{{ __('Редактировать') }}</x-a-button-primary>
+                    <x-a-button-primary :href="route('project.invitation.index', $project->id)">{{ __('Приглашения в проект') }}</x-a-button-primary>
+
+                    <x-form :action="route('project.destroy', $project->id)">
+                        @method('DELETE')
+
+                        <x-button-danger>{{ __('Удалить') }}</x-button-danger>
+                    </x-form>
+                </div>
+            @endif
         </div>
-    @endif
+    </div>
 
     <div class="mb-0">
         <ul class="card flex flex-col">

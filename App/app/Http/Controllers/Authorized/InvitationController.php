@@ -28,11 +28,11 @@ class InvitationController extends Controller
      * @param Invitation $invitation
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function accept(Request $request, Invitation $invitation)
+    public function reject(Request $request, Invitation $invitation)
     {
-        $invitation->update(['status' => StatusEnum::ACCEPTED]);
+        $invitation->update(['status' => StatusEnum::REJECTED]);
 
-        return to_route('welcome');
+        return to_route('dashboard');
     }
 
     /**
@@ -40,10 +40,15 @@ class InvitationController extends Controller
      * @param Invitation $invitation
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function reject(Request $request, Invitation $invitation)
+    public function accept(Request $request, Invitation $invitation)
     {
-        $invitation->update(['status' => StatusEnum::REJECTED]);
+        $invitation->update(['status' => StatusEnum::ACCEPTED]);
 
-        return to_route('welcome');
+        $attributes = [];
+        $attributes['user_id'] = $request->user()->id;
+
+        $invitation->project->projectUsers()->firstOrCreate($attributes);
+
+        return to_route('project.show', $invitation->project_id);
     }
 }

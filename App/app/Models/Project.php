@@ -19,6 +19,8 @@ use Stephenjude\DefaultModelSorting\Traits\DefaultOrderBy;
  * @property-read \App\Models\User|null $createdBy
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Invitation> $invitations
  * @property-read int|null $invitations_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProjectUser> $projectUsers
+ * @property-read int|null $project_users_count
  * @method static \Illuminate\Database\Eloquent\Builder|Project newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Project newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Project query()
@@ -75,6 +77,14 @@ class Project extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function projectUsers(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(ProjectUser::class, 'project_id', 'id');
+    }
+
+    /**
      * @param User $user
      * @return bool
      */
@@ -86,10 +96,10 @@ class Project extends Model
     /**
      * @param $query
      * @param $value
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
-    public function resolveRouteBindingQueryR($query, $value): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function resolveRouteBindingQueryR($query, $value): \Illuminate\Database\Eloquent\Relations\HasManyThrough
     {
-        return Auth::user()->availableProjects()->where($this->getRouteKeyName(), $value);
+        return Auth::user()->availableProjects()->where('projects.id', $value);
     }
 }

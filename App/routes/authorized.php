@@ -50,6 +50,18 @@ Route::middleware(['auth'])->group(function () {
 
                     Route::group(
                         [
+                            'as' => 'user.',
+                            'prefix' => 'user',
+                            'controller' => \App\Http\Controllers\Authorized\ProjectUserController::class,
+                        ],
+                        function () {
+                            Route::match(['GET', 'HEAD'], '/', 'index')->name('index');
+                            Route::match(['DELETE'], '/{projectUser}', 'destroy')->name('destroy');
+                        }
+                    );
+
+                    Route::group(
+                        [
                             'as' => 'invitation.',
                             'prefix' => 'invitation',
                             'controller' => \App\Http\Controllers\Authorized\ProjectInvitationController::class,

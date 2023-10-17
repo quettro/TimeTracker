@@ -5,6 +5,7 @@ namespace App\Http\Requests\Authorized\ProjectInvitation;
 use App\Enums\Invitation\StatusEnum;
 use App\Http\Requests\Authorized\Project\Request;
 use App\Models\User;
+use Closure;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use Throwable;
@@ -38,7 +39,11 @@ class StoreRequest extends Request
     {
         return [
             'email' => [
-                'required', 'string', 'email', 'max:255', Rule::notIn([$this->user()->email]), Rule::exists(User::class)
+                'required', 'string', 'email', 'max:255', Rule::notIn([$this->user()->email]), Rule::exists(User::class), function (string $attribute, mixed $value, Closure $fail) {
+                    if ($this->route('project')->projectUsers()->whereRelation('user', 'email', '=', $value)->exists()) {
+                        $fail(__('Указанный пользователь уже участвует в проекте.'));
+                    }
+                },
             ],
         ];
     }

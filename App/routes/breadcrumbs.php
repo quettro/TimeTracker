@@ -27,6 +27,11 @@ Breadcrumbs::for('project.edit', function (BreadcrumbTrail $trail, Project $proj
     $trail->push(__('Редактирование'), route('project.edit', $project->id));
 });
 
+Breadcrumbs::for('project.user.index', function (BreadcrumbTrail $trail, Project $project) {
+    $trail->parent('project.show', $project);
+    $trail->push(__('Пользователи'), route('project.user.index', $project->id));
+});
+
 Breadcrumbs::for('project.invitation.index', function (BreadcrumbTrail $trail, Project $project) {
     $trail->parent('project.show', $project);
     $trail->push(__('Приглашения в проект'), route('project.invitation.index', $project->id));
