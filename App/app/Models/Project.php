@@ -79,6 +79,14 @@ class Project extends Model
     }
 
     /**
+     * @return mixed
+     */
+    public function tasksCompleted(): mixed
+    {
+        return $this->tasks()->completed();
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function invitations(): \Illuminate\Database\Eloquent\Relations\HasMany

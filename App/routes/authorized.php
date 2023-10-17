@@ -16,6 +16,28 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(
         [
+            'as' => 'task.',
+            'prefix' => 'task',
+            'controller' => \App\Http\Controllers\Authorized\TaskController::class,
+        ],
+        function () {
+            Route::match(['GET', 'HEAD'], '/', 'index')->name('index');
+        }
+    );
+
+    Route::group(
+        [
+            'as' => 'statistics.',
+            'prefix' => 'statistics',
+            'controller' => \App\Http\Controllers\Authorized\StatisticsController::class,
+        ],
+        function () {
+            Route::match(['GET', 'HEAD'], '/', 'index')->name('index');
+        }
+    );
+
+    Route::group(
+        [
             'as' => 'invitation.',
             'prefix' => 'invitation/{invitation:token}',
             'controller' => \App\Http\Controllers\Authorized\InvitationController::class,

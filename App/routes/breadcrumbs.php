@@ -9,6 +9,14 @@ Breadcrumbs::for('dashboard', function (BreadcrumbTrail $trail) {
     $trail->push(__('Дашборд'), route('dashboard'));
 });
 
+Breadcrumbs::for('task.index', function (BreadcrumbTrail $trail) {
+    $trail->push(__('Задачи'), route('task.index'));
+});
+
+Breadcrumbs::for('statistics.index', function (BreadcrumbTrail $trail) {
+    $trail->push(__('Статистика'), route('statistics.index'));
+});
+
 Breadcrumbs::for('project.index', function (BreadcrumbTrail $trail) {
     $trail->push(__('Проекты'), route('project.index'));
 });

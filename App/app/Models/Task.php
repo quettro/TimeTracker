@@ -70,6 +70,14 @@ class Task extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
+    public function project(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Project::class, 'id', 'project_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function executor(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(User::class, 'id', 'executor_id');

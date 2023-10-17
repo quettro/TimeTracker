@@ -54,7 +54,7 @@
             </li>
             <li class="flex items-center border-b border-slate-300 p-5 last:border-0 break-all">
                 <div class="w-[40%] shrink-0">{{ __('Выполненных задач в проекте') }}:</div>
-                <div>{{ $project->tasks()->completed()->count() }}</div>
+                <div>{{ $project->tasksCompleted()->count() }}</div>
             </li>
             <li class="flex items-center border-b border-slate-300 p-5 last:border-0 break-all">
                 <div class="w-[40%] shrink-0">{{ __('Затрачено времени') }}:</div>
