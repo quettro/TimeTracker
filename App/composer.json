@@ -69,13 +69,20 @@
             "@php artisan ide-helper:models -R",
             "@php artisan ide-helper:meta"
         ],
-        "setup": [
+        "development": [
             "@php artisan key:generate",
             "@php artisan db:wipe",
             "@php artisan migrate",
             "@php artisan db:seed",
             "composer ide",
             "composer clear"
+        ],
+        "setup": [
+            "composer clear",
+            "@php artisan key:generate",
+            "@php artisan db:wipe",
+            "@php artisan migrate",
+            "@php artisan db:seed"
         ]
     },
     "extra": {
