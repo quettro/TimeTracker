@@ -5,6 +5,10 @@
 
 @section('content')
     <div class="mb-8">
+        {{ Breadcrumbs::render('project.edit', $project) }}
+    </div>
+
+    <div class="mb-8">
         <h1 class="h3">{{ __('Редактирование') }}</h1>
     </div>
 

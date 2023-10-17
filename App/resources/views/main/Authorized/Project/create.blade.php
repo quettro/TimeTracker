@@ -5,6 +5,10 @@
 
 @section('content')
     <div class="mb-8">
+        {{ Breadcrumbs::render('project.create') }}
+    </div>
+
+    <div class="mb-8">
         <h1 class="h3">{{ __('Новая запись') }}</h1>
     </div>
 

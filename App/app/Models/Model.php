@@ -20,10 +20,13 @@ class Model extends \Illuminate\Database\Eloquent\Model
      * @param $field
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function resolveRouteBindingQuery($query, $value, $field = null): \Illuminate\Database\Eloquent\Relations\Relation
+    public function resolveRouteBindingQuery($query, $value, $field = null)
     {
         $method = 'resolveRouteBindingQuery' . Str::studly($field);
 
-        return ($field && method_exists($this, $method)) ? $this->{$method}($query, $value) : parent::resolveChildRouteBindingQuery($query, $value, $field);
+        if ($field && method_exists($this, $method))
+            return $this->{$method}($query, $value);
+
+        return parent::resolveRouteBindingQuery($query, $value, $field);
     }
 }

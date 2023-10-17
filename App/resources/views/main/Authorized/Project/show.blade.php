@@ -5,6 +5,10 @@
 
 @section('content')
     <div class="mb-8">
+        {{ Breadcrumbs::render('project.show', $project) }}
+    </div>
+
+    <div class="mb-8">
         <h1 class="h3">{{ $project->name }}</h1>
     </div>
 
@@ -12,6 +16,7 @@
         <div class="mb-8">
             <div class="flex items-center gap-2">
                 <x-a-button-primary :href="route('project.edit', $project->id)">{{ __('Редактировать') }}</x-a-button-primary>
+                <x-a-button-primary :href="route('project.invitation.index', $project->id)">{{ __('Приглашения в проект') }}</x-a-button-primary>
 
                 <x-form :action="route('project.destroy', $project->id)">
                     @method('DELETE')
