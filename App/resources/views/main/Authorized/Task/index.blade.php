@@ -1,6 +1,6 @@
 @extends('layouts.authorized')
 
-@section('title', __('Задачи'))
+@section('title', __('Мои задачи'))
 @section('description', __(''))
 
 @section('content')
@@ -9,7 +9,7 @@
     </div>
 
     <div class="mb-8">
-        <h1 class="h3">{{ __('Задачи') }}</h1>
+        <h1 class="h3">{{ __('Мои задачи') }}</h1>
     </div>
 
     <div class="mb-0">

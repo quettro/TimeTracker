@@ -9,6 +9,7 @@ use App\Models\Invitation;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class InvitationController extends Controller
 {
@@ -26,7 +27,7 @@ class InvitationController extends Controller
     /**
      * @param Request $request
      * @param Invitation $invitation
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function reject(Request $request, Invitation $invitation)
     {
@@ -38,7 +39,7 @@ class InvitationController extends Controller
     /**
      * @param Request $request
      * @param Invitation $invitation
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function accept(Request $request, Invitation $invitation)
     {

@@ -44,7 +44,7 @@
                                     <td class="table__td">{{ $object->name }}</td>
                                     <td class="table__td">{{ $object->tasks_count }}</td>
                                     <td class="table__td">{{ $object->tasks_completed_count }}</td>
-                                    <td class="table__td">{{ $object->tasks_sum_execution_time ? \Carbon\CarbonInterval::second($object->tasks_sum_execution_time)->forHumans() : __('0 секунд') }}</td>
+                                    <td class="table__td">{{ $object->tasks_sum_execution_time ? \Carbon\CarbonInterval::second($object->tasks_sum_execution_time)->cascade()->forHumans(short: true) : __('0 секунд') }}</td>
                                     <td class="table__td">{{ $object->status->description }}</td>
                                     <td class="table__td">{{ $object->created_at }}</td>
                                 </tr>

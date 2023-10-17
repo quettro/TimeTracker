@@ -20,7 +20,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
      * @param $field
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function resolveRouteBindingQuery($query, $value, $field = null)
+    public function resolveRouteBindingQuery($query, $value, $field = null): mixed
     {
         $method = 'resolveRouteBindingQuery' . Str::studly($field);
 

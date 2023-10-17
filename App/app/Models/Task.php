@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\Task\StatusEnum;
 use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Stephenjude\DefaultModelSorting\Traits\DefaultOrderBy;
 
@@ -23,7 +24,9 @@ use Stephenjude\DefaultModelSorting\Traits\DefaultOrderBy;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\User|null $executor
+ * @property-read \App\Models\Project|null $project
  * @method static Builder|Task completed()
+ * @method static \Database\Factories\TaskFactory factory($count = null, $state = [])
  * @method static Builder|Task newModelQuery()
  * @method static Builder|Task newQuery()
  * @method static Builder|Task query()
@@ -45,7 +48,7 @@ class Task extends Model
     /**
      *
      */
-    use DefaultOrderBy;
+    use HasFactory, DefaultOrderBy;
 
     /**
      * @var array
@@ -100,7 +103,7 @@ class Task extends Model
      */
     public function currentExecutionTime(): string
     {
-        return ($time = $this->execution_time + $this->sinceTheTrackerWasLaunched()) ? CarbonInterval::second($time)->forHumans() : (string) __('0 секунд');
+        return ($time = $this->execution_time + $this->sinceTheTrackerWasLaunched()) ? CarbonInterval::second($time)->cascade()->forHumans(short: true) : (string) __('0 секунд');
     }
 
     /**

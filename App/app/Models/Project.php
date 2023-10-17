@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\Project\StatusEnum;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Auth;
 use Stephenjude\DefaultModelSorting\Traits\DefaultOrderBy;
 
@@ -23,6 +24,7 @@ use Stephenjude\DefaultModelSorting\Traits\DefaultOrderBy;
  * @property-read int|null $project_users_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Task> $tasks
  * @property-read int|null $tasks_count
+ * @method static \Database\Factories\ProjectFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Project newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Project newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Project query()
@@ -40,7 +42,7 @@ class Project extends Model
     /**
      *
      */
-    use DefaultOrderBy;
+    use HasFactory, DefaultOrderBy;
 
     /**
      * @var array

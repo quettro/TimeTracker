@@ -57,8 +57,8 @@
                 <div>{{ $project->tasksCompleted()->count() }}</div>
             </li>
             <li class="flex items-center border-b border-slate-300 p-5 last:border-0 break-all">
-                <div class="w-[40%] shrink-0">{{ __('Затрачено времени') }}:</div>
-                <div>{{ \Carbon\CarbonInterval::second($project->tasks()->sum('execution_time'))->forHumans() }}</div>
+                <div class="w-[40%] shrink-0">{{ __('Общее затраченное время') }}:</div>
+                <div>{{ \Carbon\CarbonInterval::second($project->tasks()->sum('execution_time'))->cascade()->forHumans(short: true) }}</div>
             </li>
             <li class="flex items-center border-b border-slate-300 p-5 last:border-0 break-all">
                 <div class="w-[40%] shrink-0">{{ __('Дата и время создания') }}:</div>

@@ -10,7 +10,7 @@ Breadcrumbs::for('dashboard', function (BreadcrumbTrail $trail) {
 });
 
 Breadcrumbs::for('task.index', function (BreadcrumbTrail $trail) {
-    $trail->push(__('Задачи'), route('task.index'));
+    $trail->push(__('Мои задачи'), route('task.index'));
 });
 
 Breadcrumbs::for('statistics.index', function (BreadcrumbTrail $trail) {
